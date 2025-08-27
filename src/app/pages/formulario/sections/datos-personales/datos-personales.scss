@@ -1,0 +1,44 @@
+.info-personal {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .section-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #003087;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-description {
+    margin-bottom: 2rem;
+    font-size: 1rem;
+    color: #333;
+
+    strong {
+      color: #000;
+    }
+  }
+
+  .info-form {
+    width: 100%;
+
+    .form-grid {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+      .direccion-full {
+        grid-column: span 2;
+
+        @media (max-width: 768px) {
+          grid-column: span 1;
+        }
+      }
+    }
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+}

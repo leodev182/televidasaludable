@@ -1,6 +1,4 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
-import { App } from './app/app';
+import { FormularioComponent } from './app/pages/formulario/formulario.component';
 
-bootstrapApplication(App, appConfig)
-  .catch((err) => console.error(err));
+bootstrapApplication(FormularioComponent).catch((err) => console.error(err));

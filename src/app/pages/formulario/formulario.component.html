@@ -1,0 +1,9 @@
+<ng-container [ngSwitch]="pasoActual">
+  <app-bienvenida *ngSwitchCase="0" (comenzar)="avanzarPaso()"></app-bienvenida>
+
+  <app-datos-personales *ngSwitchCase="1"></app-datos-personales>
+  <app-informacion-empleador *ngSwitchCase="2"></app-informacion-empleador>
+  <app-informacion-medica *ngSwitchCase="3"></app-informacion-medica>
+  <app-declaracion-jurada *ngSwitchCase="4"></app-declaracion-jurada>
+  <app-firma *ngSwitchCase="5"></app-firma>
+</ng-container>

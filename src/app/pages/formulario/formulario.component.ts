@@ -4,6 +4,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatOptionModule } from '@angular/material/core';
 
 import { Bienvenida } from './sections/bienvenida/bienvenida';
 import { DatosPersonales } from './sections/datos-personales/datos-personales';
@@ -22,6 +25,9 @@ import { Firma } from './sections/firma/firma';
     MatSelectModule,
     MatFormFieldModule,
     MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatOptionModule,
     Bienvenida,
     DatosPersonales,
     InformacionEmpleador,
@@ -29,6 +35,7 @@ import { Firma } from './sections/firma/firma';
     DeclaracionJurada,
     Firma,
   ],
+
   templateUrl: './formulario.component.html',
   styleUrls: ['./formulario.component.scss'],
 })

@@ -1,0 +1,19 @@
+// custom-theme.scss
+@use '@angular/material' as mat;
+
+// Definir la paleta de colores
+$primary-palette: mat.$indigo-palette;
+$accent-palette: mat.$pink-palette;
+
+// Crear el tema
+$custom-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $primary-palette,
+      accent: $accent-palette,
+    ),
+  )
+);
+
+// Aplicar el tema
+@include mat.all-component-themes($custom-theme);

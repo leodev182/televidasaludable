@@ -1,80 +1,87 @@
 <section class="info-personal">
   <h2 class="section-title">INFORMACIÓN PERSONAL</h2>
   <p class="section-description">
-    Recuerde siempre actualizar sus <strong>DATOS PERSONALES</strong>.
+    Esta es la recopilación de sus <strong>DATOS PERSONALES</strong>.
   </p>
 
   <form class="info-form" [formGroup]="personalForm">
     <div class="form-grid">
-      <mat-form-field appearance="outline">
+      <!-- Fila 1 -->
+      <mat-form-field appearance="outline" class="form-field">
         <mat-label>Nombres Completos</mat-label>
-        <input matInput formControlName="nombres" required />
+        <input matInput formControlName="nombres" placeholder="Ej: Juan Andrés" />
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" class="form-field">
         <mat-label>Apellidos Completos</mat-label>
-        <input matInput formControlName="apellidos" required />
+        <input matInput formControlName="apellidos" placeholder="Ej: Pérez Soto" />
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <!-- Fila 2 -->
+      <mat-form-field appearance="outline" class="form-field">
         <mat-label>Run</mat-label>
-        <input matInput formControlName="run" required />
+        <input matInput formControlName="rut" placeholder="Ej: 12345678-9" />
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" class="form-field">
         <mat-label>Género</mat-label>
-        <mat-select formControlName="genero" required>
+        <mat-select formControlName="genero">
           <mat-option value="femenino">Femenino</mat-option>
           <mat-option value="masculino">Masculino</mat-option>
           <mat-option value="otro">Otro</mat-option>
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <!-- Fila 3 -->
+      <mat-form-field appearance="outline" class="form-field">
         <mat-label>Fecha de Nacimiento</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento" required />
+        <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento" />
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" class="form-field">
         <mat-label>Teléfono / Celular</mat-label>
-        <input matInput formControlName="telefono" required />
+        <input matInput formControlName="telefono" placeholder="Ej: +56 9 1234 5678" />
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <!-- Fila 4 -->
+      <mat-form-field appearance="outline" class="form-field">
         <mat-label>Email</mat-label>
-        <input matInput formControlName="email" type="email" required />
+        <input matInput formControlName="email" type="email" placeholder="correo@ejemplo.com" />
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" class="form-field">
         <mat-label>Nacionalidad</mat-label>
-        <input matInput formControlName="nacionalidad" required />
+        <input matInput formControlName="nacionalidad" />
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="direccion-full">
-        <mat-label>Dirección (Especificar calle, número y piso)</mat-label>
-        <input matInput formControlName="direccion" required />
+      <!-- Fila 5 -->
+      <mat-form-field appearance="outline" class="form-field full-width">
+        <mat-label>Dirección (calle, número y piso)</mat-label>
+        <input matInput formControlName="direccion" />
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <!-- Fila 6 -->
+      <mat-form-field appearance="outline" class="form-field">
         <mat-label>Región</mat-label>
-        <input matInput formControlName="region" required />
+        <input matInput formControlName="region" />
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" class="form-field">
         <mat-label>Provincia</mat-label>
-        <input matInput formControlName="provincia" required />
+        <input matInput formControlName="provincia" />
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <!-- Fila 7 -->
+      <mat-form-field appearance="outline" class="form-field">
         <mat-label>Comuna</mat-label>
-        <input matInput formControlName="comuna" required />
+        <input matInput formControlName="comuna" />
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" class="form-field">
         <mat-label>Previsión</mat-label>
-        <mat-select formControlName="prevision" required>
+        <mat-select formControlName="prevision">
           <mat-option value="fonasa">Fonasa</mat-option>
           <mat-option value="isapre">Isapre</mat-option>
           <mat-option value="particular">Particular</mat-option>

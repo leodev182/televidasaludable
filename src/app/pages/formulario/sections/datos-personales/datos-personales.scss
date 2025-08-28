@@ -1,44 +1,54 @@
-.info-personal {
-  padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
+@use '@angular/material' as mat;
+@use '../../../../../styles/custom-theme.scss' as televida;
 
-  .section-title {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #003087;
-    margin-bottom: 0.5rem;
+$form-radius: 6px;
+$form-border-color: televida.$televida-primary;
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.form-field {
+  width: 100%;
+
+  ::ng-deep .mat-form-field-outline {
+    border-radius: $form-radius;
+    border-color: $form-border-color !important;
   }
 
-  .section-description {
-    margin-bottom: 2rem;
-    font-size: 1rem;
-    color: #333;
-
-    strong {
-      color: #000;
-    }
+  ::ng-deep .mat-form-field-wrapper {
+    padding-left: 0.5rem;
   }
 
-  .info-form {
-    width: 100%;
-
-    .form-grid {
-      display: grid;
-      gap: 1.5rem;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-
-      .direccion-full {
-        grid-column: span 2;
-
-        @media (max-width: 768px) {
-          grid-column: span 1;
-        }
-      }
-    }
+  ::ng-deep .mat-input-element,
+  ::ng-deep .mat-select-value {
+    padding-left: 0.3rem;
   }
 
-  mat-form-field {
-    width: 100%;
+  ::ng-deep .mat-select-trigger {
+    background-color: rgba(mat.get-color-from-palette(televida.$televida-primary, 500), 0.08);
+    border-radius: $form-radius;
+  }
+
+  ::ng-deep .mat-select-arrow {
+    color: mat.get-color-from-palette(televida.$televida-primary, 500);
+  }
+
+  ::ng-deep .mat-form-field-label {
+    color: mat.get-color-from-palette(televida.$televida-primary, 700) !important;
+  }
+
+  ::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline {
+    border-color: $form-border-color !important;
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
   }
 }

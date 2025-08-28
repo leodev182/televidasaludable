@@ -1,0 +1,20 @@
+@use '@angular/material' as mat;
+
+// Define paletas personalizadas
+$primary-palette: mat.define-palette(mat.$indigo-palette, 500, 100, 900);
+$accent-palette: mat.define-palette(mat.$pink-palette, 500, 100, 900);
+$warn-palette: mat.define-palette(mat.$red-palette, 500, 100, 900);
+
+// Define el tema
+$custom-theme: mat.define-theme(
+  (
+    color: (
+      primary: $primary-palette,
+      accent: $accent-palette,
+      warn: $warn-palette,
+    ),
+  )
+);
+
+// Aplica el tema a todos los componentes
+@include mat.all-component-themes($custom-theme);

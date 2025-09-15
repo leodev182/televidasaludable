@@ -1,54 +1,123 @@
-@use '@angular/material' as mat;
-@use '../../../../../styles/custom-theme.scss' as televida;
+/* ======== Layout + estilos de campos (CSS puro) ======== */
+:root {
+  --tv-green: #16a34a;
+} /* reemplaza por el verde exacto del logo */
 
-$form-radius: 6px;
-$form-border-color: televida.$televida-primary;
-
-.form-grid {
+/* ---- GRID DEL FORMULARIO ---- */
+.info-personal .form-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.2rem;
-  margin-bottom: 2rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr)); /* 3 columnas iguales */
+  gap: 28px 32px; /* fila / columna */
+  align-items: start;
 }
 
-.form-field {
+/* Que cada form-field se adapte bien al grid */
+.info-personal .form-field {
   width: 100%;
-
-  ::ng-deep .mat-form-field-outline {
-    border-radius: $form-radius;
-    border-color: $form-border-color !important;
-  }
-
-  ::ng-deep .mat-form-field-wrapper {
-    padding-left: 0.5rem;
-  }
-
-  ::ng-deep .mat-input-element,
-  ::ng-deep .mat-select-value {
-    padding-left: 0.3rem;
-  }
-
-  ::ng-deep .mat-select-trigger {
-    background-color: rgba(mat.get-color-from-palette(televida.$televida-primary, 500), 0.08);
-    border-radius: $form-radius;
-  }
-
-  ::ng-deep .mat-select-arrow {
-    color: mat.get-color-from-palette(televida.$televida-primary, 500);
-  }
-
-  ::ng-deep .mat-form-field-label {
-    color: mat.get-color-from-palette(televida.$televida-primary, 700) !important;
-  }
-
-  ::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline {
-    border-color: $form-border-color !important;
-  }
 }
 
-// Responsive
-@media (max-width: 768px) {
-  .form-grid {
+/* Cualquier campo que tenga .full-width ocupa toda la fila */
+.info-personal .form-field.full-width {
+  grid-column: 1 / -1;
+}
+
+/* Breakpoints responsivos */
+@media (max-width: 1024px) {
+  .info-personal .form-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 640px) {
+  .info-personal .form-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* ---- ORDEN EXACTO COMO EN TU SEGUNDA IMAGEN ---- */
+/* Si tu HTML ya está en ese orden, no necesitas esto.
+   Si no, fuerza el orden por posición actual en el DOM. Ajusta si varía. */
+.info-personal .form-grid > .form-field:nth-of-type(1) {
+  order: 1;
+} /* Nombres */
+.info-personal .form-grid > .form-field:nth-of-type(2) {
+  order: 2;
+} /* Apellidos */
+.info-personal .form-grid > .form-field:nth-of-type(3) {
+  order: 3;
+} /* Run */
+.info-personal .form-grid > .form-field:nth-of-type(4) {
+  order: 4;
+} /* Género */
+.info-personal .form-grid > .form-field:nth-of-type(5) {
+  order: 5;
+} /* Fecha de Nacimiento */
+.info-personal .form-grid > .form-field:nth-of-type(6) {
+  order: 6;
+} /* Teléfono */
+.info-personal .form-grid > .form-field:nth-of-type(7) {
+  order: 7;
+} /* Email */
+.info-personal .form-grid > .form-field:nth-of-type(8) {
+  order: 8;
+} /* Nacionalidad */
+.info-personal .form-grid > .form-field:nth-of-type(9) {
+  order: 9;
+} /* Dirección (usa .full-width si quieres 3 cols) */
+.info-personal .form-grid > .form-field:nth-of-type(10) {
+  order: 10;
+} /* Región */
+.info-personal .form-grid > .form-field:nth-of-type(11) {
+  order: 11;
+} /* Provincia */
+.info-personal .form-grid > .form-field:nth-of-type(12) {
+  order: 12;
+} /* Comuna */
+.info-personal .form-grid > .form-field:nth-of-type(13) {
+  order: 13;
+} /* Previsión */
+
+/* Si “Dirección” debe ir de ancho completo como en la 2ª imagen,
+   agrega en el HTML la clase .full-width a ese mat-form-field, o descomenta esta línea:
+.info-personal .form-grid > .form-field:nth-of-type(9) { grid-column: 1 / -1; }
+*/
+
+/* ---- TUS 3 PEDIDOS DE ESTILO (sin theming) ---- */
+
+/* 1) Bordes curvos + borde verde */
+.info-personal .mat-mdc-form-field-appearance-outline .mdc-notched-outline {
+  border-radius: 8px;
+}
+.info-personal .mat-mdc-form-field-appearance-outline .mdc-notched-outline__leading,
+.info-personal .mat-mdc-form-field-appearance-outline .mdc-notched-outline__trailing {
+  border-color: var(--tv-green) !important;
+}
+.info-personal .mat-mdc-form-field.mat-focused .mdc-notched-outline__leading,
+.info-personal .mat-mdc-form-field.mat-focused .mdc-notched-outline__trailing {
+  border-color: var(--tv-green) !important;
+}
+
+/* (opcional) label e iconos en foco del mismo verde */
+.info-personal .mat-mdc-form-field.mat-focused .mdc-floating-label,
+.info-personal .mat-mdc-form-field.mat-focused .mat-mdc-form-field-icon-suffix {
+  color: var(--tv-green) !important;
+}
+
+/* 2) Padding interno (sin tocar el infix para no romper el label) */
+.info-personal .mat-mdc-text-field-wrapper .mdc-text-field__input {
+  padding: 12px 14px;
+  box-sizing: border-box;
+}
+
+/* 3) Selects con fondo sólido */
+.info-personal .mat-mdc-form-field-type-mat-select .mat-mdc-text-field-wrapper {
+  background: #fff;
+  border-radius: 8px;
+}
+.info-personal .mat-mdc-select-panel {
+  background: #fff;
+}
+
+/* Altura cómoda general (opcional) */
+.info-personal .mdc-text-field {
+  min-height: 44px;
 }

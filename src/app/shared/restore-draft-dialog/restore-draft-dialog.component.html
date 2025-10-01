@@ -1,0 +1,17 @@
+<div class="restore-dialog">
+  <div class="dialog-icon">
+    <mat-icon color="primary">restore</mat-icon>
+  </div>
+
+  <h2 mat-dialog-title>Formulario en progreso</h2>
+
+  <mat-dialog-content>
+    <p>Detectamos que tenías un formulario sin terminar.</p>
+    <p class="highlight">¿Deseas continuar donde lo dejaste?</p>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="dismiss()">Empezar de nuevo</button>
+    <button mat-raised-button color="primary" (click)="restore()">Continuar llenando</button>
+  </mat-dialog-actions>
+</div>

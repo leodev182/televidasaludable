@@ -1,9 +1,81 @@
-<ng-container [ngSwitch]="pasoActual">
-  <app-bienvenida *ngSwitchCase="0" (comenzar)="avanzarPaso()"></app-bienvenida>
+<!-- ========================================
+     TOPBAR FIJA (fuera del @switch)
+     Solo visible después de Bienvenida
+========================================= -->
+@if (pasoActual() > 0) {
+<header class="topbar">
+  <div class="topbar__left">
+    <img src="AlmaIcon.svg" alt="Alma Nova Clinic" class="topbar__logo" />
+    <span class="topbar__title">Paso {{ pasoActual() }} de {{ totalPasos - 1 }}</span>
+  </div>
 
-  <app-datos-personales *ngSwitchCase="1"></app-datos-personales>
-  <app-informacion-empleador *ngSwitchCase="2"></app-informacion-empleador>
-  <app-informacion-medica *ngSwitchCase="3"></app-informacion-medica>
-  <app-declaracion-jurada *ngSwitchCase="4"></app-declaracion-jurada>
-  <app-firma *ngSwitchCase="5"></app-firma>
-</ng-container>
+  <div class="topbar__center">
+    <!-- Progreso visual (opcional: barra o indicador) -->
+    <div class="progress-indicator">
+      @for (step of [1,2,3,4,5]; track step) {
+      <div
+        class="progress-dot"
+        [class.active]="pasoActual() === step"
+        [class.completed]="pasoActual() > step"
+      ></div>
+      }
+    </div>
+  </div>
+
+  <div class="topbar__right">
+    <button mat-button (click)="retrocederPaso()" [disabled]="pasoActual() === 0">
+      ← Anterior
+    </button>
+
+    @if (pasoActual() < totalPasos - 1) {
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="avanzarPaso()"
+      [class.disabled]="!canGoNext()"
+    >
+      Siguiente →
+    </button>
+    } @else {
+    <button mat-raised-button color="accent" (click)="enviar()" [disabled]="!canSubmit()">
+      ✓ Enviar
+    </button>
+    }
+  </div>
+</header>
+}
+
+<!-- ========================================
+     CONTENIDO VARIABLE (con @switch)
+========================================= -->
+<main class="form-content">
+  @switch (pasoActual()) { @case (0) {
+  <app-bienvenida (comenzar)="avanzarPaso()"></app-bienvenida>
+  } @case (1) {
+  <app-datos-personales
+    [requestValidate]="triggerValidation()"
+    (validChange)="onStepValidChange(1, $event)"
+    (dataChange)="onStepDataChange(1, $event)"
+  ></app-datos-personales>
+  } @case (2) {
+  <section class="step-placeholder">
+    <h2>Información del Empleador</h2>
+    <p>Componente en construcción...</p>
+  </section>
+  } @case (3) {
+  <section class="step-placeholder">
+    <h2>Información Médica</h2>
+    <p>Componente en construcción...</p>
+  </section>
+  } @case (4) {
+  <section class="step-placeholder">
+    <h2>Declaración Jurada</h2>
+    <p>Componente en construcción...</p>
+  </section>
+  } @case (5) {
+  <section class="step-placeholder">
+    <h2>Firma Digital</h2>
+    <p>Componente en construcción...</p>
+  </section>
+  } }
+</main>

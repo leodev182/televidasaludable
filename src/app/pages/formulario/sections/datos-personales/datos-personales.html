@@ -1,92 +1,85 @@
-<section class="info-personal">
-  <h2 class="section-title">INFORMACIÓN PERSONAL</h2>
-  <p class="section-description">
-    Esta es la recopilación de sus <strong>DATOS PERSONALES</strong>.
-  </p>
-
-  <form class="info-form" [formGroup]="personalForm">
+<div class="info-personal">
+  <form [formGroup]="form" class="info-form">
     <div class="form-grid">
-      <!-- Fila 1 -->
-      <mat-form-field appearance="outline" class="form-field">
-        <mat-label>Nombres Completos</mat-label>
+      <!-- fila 1 -->
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Nombres Completos*</mat-label>
         <input matInput formControlName="nombres" placeholder="Ej: Juan Andrés" />
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="form-field">
-        <mat-label>Apellidos Completos</mat-label>
-        <input matInput formControlName="apellidos" placeholder="Ej: Pérez Soto" />
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Apellidos Completos*</mat-label>
+        <input matInput formControlName="apellidos" />
       </mat-form-field>
 
-      <!-- Fila 2 -->
-      <mat-form-field appearance="outline" class="form-field">
-        <mat-label>Run</mat-label>
-        <input matInput formControlName="rut" placeholder="Ej: 12345678-9" />
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Run*</mat-label>
+        <input matInput formControlName="run" />
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="form-field">
-        <mat-label>Género</mat-label>
+      <!-- fila 2 -->
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Género*</mat-label>
         <mat-select formControlName="genero">
-          <mat-option value="femenino">Femenino</mat-option>
-          <mat-option value="masculino">Masculino</mat-option>
-          <mat-option value="otro">Otro</mat-option>
+          <mat-option value="M">Masculino</mat-option>
+          <mat-option value="F">Femenino</mat-option>
+          <mat-option value="O">Otro</mat-option>
         </mat-select>
       </mat-form-field>
 
-      <!-- Fila 3 -->
-      <mat-form-field appearance="outline" class="form-field">
-        <mat-label>Fecha de Nacimiento</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento" />
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Fecha de Nacimiento*</mat-label>
+        <input matInput [matDatepicker]="dp" formControlName="fechaNacimiento" />
+        <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
+        <mat-datepicker #dp></mat-datepicker>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="form-field">
-        <mat-label>Teléfono / Celular</mat-label>
-        <input matInput formControlName="telefono" placeholder="Ej: +56 9 1234 5678" />
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Teléfono / Celular*</mat-label>
+        <input matInput formControlName="telefono" />
       </mat-form-field>
 
-      <!-- Fila 4 -->
-      <mat-form-field appearance="outline" class="form-field">
-        <mat-label>Email</mat-label>
-        <input matInput formControlName="email" type="email" placeholder="correo@ejemplo.com" />
+      <!-- fila 3 -->
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Email*</mat-label>
+        <input matInput formControlName="email" />
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="form-field">
-        <mat-label>Nacionalidad</mat-label>
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Nacionalidad*</mat-label>
         <input matInput formControlName="nacionalidad" />
       </mat-form-field>
 
-      <!-- Fila 5 -->
-      <mat-form-field appearance="outline" class="form-field full-width">
-        <mat-label>Dirección (calle, número y piso)</mat-label>
+      <!-- dirección full width -->
+      <mat-form-field class="form-field full-width" appearance="outline">
+        <mat-label>Dirección (calle, número y piso)*</mat-label>
         <input matInput formControlName="direccion" />
       </mat-form-field>
 
-      <!-- Fila 6 -->
-      <mat-form-field appearance="outline" class="form-field">
-        <mat-label>Región</mat-label>
+      <!-- fila 4 -->
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Región*</mat-label>
         <input matInput formControlName="region" />
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="form-field">
-        <mat-label>Provincia</mat-label>
-        <input matInput formControlName="provincia" />
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Ciudad***</mat-label>
+        <input matInput formControlName="ciudad" />
       </mat-form-field>
 
-      <!-- Fila 7 -->
-      <mat-form-field appearance="outline" class="form-field">
-        <mat-label>Comuna</mat-label>
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Comuna*</mat-label>
         <input matInput formControlName="comuna" />
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="form-field">
-        <mat-label>Previsión</mat-label>
+      <!-- fila 5 -->
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Previsión*</mat-label>
         <mat-select formControlName="prevision">
-          <mat-option value="fonasa">Fonasa</mat-option>
-          <mat-option value="isapre">Isapre</mat-option>
-          <mat-option value="particular">Particular</mat-option>
+          <mat-option value="fonasa">FONASA</mat-option>
+          <mat-option value="isapre">ISAPRE</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
   </form>
-</section>
+</div>

@@ -1,0 +1,126 @@
+.firma-section {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: #115e5e;
+}
+
+.instructions {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  background: #e8f5f5;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+
+  mat-icon {
+    color: #115e5e;
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+
+  p {
+    margin: 0;
+    line-height: 1.6;
+    color: #333;
+  }
+}
+
+.canvas-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  border: 2px solid #115e5e;
+  border-radius: 8px;
+  background: white;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.5rem;
+
+  canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: crosshair;
+    touch-action: none; // Evitar scroll en móviles al firmar
+  }
+
+  .placeholder-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ccc;
+    font-size: 1.5rem;
+    font-style: italic;
+    pointer-events: none;
+    user-select: none;
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+
+  button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
+
+.success-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: #e8f5e9;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+
+  mat-icon {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+  }
+
+  p {
+    margin: 0;
+    color: #2e7d32;
+    font-weight: 500;
+  }
+}
+
+.legal-notice {
+  background: #f5f5f5;
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid #115e5e;
+
+  p {
+    margin: 0;
+    color: #666;
+    line-height: 1.6;
+  }
+}
+
+@media (max-width: 768px) {
+  .firma-section {
+    padding: 1rem;
+  }
+
+  .canvas-container {
+    height: 250px;
+  }
+}

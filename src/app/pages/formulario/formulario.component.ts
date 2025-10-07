@@ -8,11 +8,25 @@ import { DatosPersonalesComponent } from './sections/datos-personales/datos-pers
 import { FormularioDataService, FormularioCompleto } from '../../services/formulario-data.service';
 import { LoggerService } from '../../services/logger.service';
 import { RestoreDraftDialogComponent } from '../../shared/restore-draft-dialog/restore-draft-dialog.component';
+import { InformacionEmpleadorComponent } from './sections/informacion-empleador/informacion-empleador';
+import { InformacionMedicaComponent } from './sections/informacion-medica/informacion-medica';
+import { DeclaracionJuradaComponent } from './sections/declaracion-jurada/declaracion-jurada';
+import { FirmaComponent } from './sections/firma/firma';
 
 @Component({
   selector: 'app-formulario',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatDialogModule, Bienvenida, DatosPersonalesComponent],
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatDialogModule,
+    Bienvenida,
+    DatosPersonalesComponent,
+    InformacionEmpleadorComponent,
+    InformacionMedicaComponent,
+    DeclaracionJuradaComponent,
+    FirmaComponent,
+  ],
   templateUrl: './formulario.component.html',
   styleUrls: ['./formulario.component.scss'],
 })

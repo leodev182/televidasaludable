@@ -21,24 +21,104 @@ export interface DatosPersonalesDTO {
 }
 
 export interface InformacionEmpleadorDTO {
-  empresaNombre?: string;
-  cargo?: string;
+  empresaNombre: string;
+  empresaRut: string;
+  cargo: string;
+  fechaIngreso: Date;
+  tipoContrato: 'indefinido' | 'plazo-fijo' | 'honorarios' | 'otro';
+  telefonoEmpresa: string;
+  direccionEmpresa: string;
+  nombreSupervisor?: string;
+  telefonoSupervisor?: string;
 }
 
 export interface InformacionMedicaDTO {
-  alergias?: string;
-  medicamentos?: string;
+  // Preguntas 1-2
+  sintomas: string;
+  cuandoInicioSintomas: string;
+
+  // Pregunta 3: Enfermedad crónica
+  enfermedadCronica: 'si' | 'no' | '';
+  detalleEnfermedadCronica?: string; // Si responde "sí"
+
+  // Pregunta 4: Enfermedad mental
+  enfermedadMental: 'si' | 'no' | '';
+  detalleEnfermedadMental?: string; // Si responde "sí"
+
+  // Pregunta 5: Cirugía previa
+  cirugiaPrevia: 'si' | 'no' | '';
+
+  // Pregunta 6: Reacción alérgica
+  reaccionAlergica: 'si' | 'no' | '';
+  detalleReaccionAlergica?: string; // Si responde "sí"
+
+  // Pregunta 7: Antecedentes familiares
+  antecedenteFamiliar: 'si' | 'no' | '';
+  detalleAntecedenteFamiliar?: string; // Si responde "sí"
+
+  // Pregunta 8: Estado civil
+  estadoCivil: string;
+
+  // Pregunta 9: Hijos
+  tieneHijos: 'si' | 'no' | '';
+  cuantosHijos?: number; // Si responde "sí"
+
+  // Pregunta 10: Personas que viven con usted
+  cuantasPersonasViven: string;
+
+  // Pregunta 12: Fuma
+  fuma: 'si' | 'no' | '';
+
+  // Pregunta 13: Consume alcohol
+  consumeAlcohol: 'si' | 'no' | '';
+
+  // Pregunta 14: Licencia médica
+  tieneLicenciaMedica: 'si' | 'no' | '';
+
+  // Pregunta 15-16: Peso y estatura
+  pesoKilos: string;
+  estaturaMetros: string;
+
+  // Pregunta 17: Come bien
+  puedeComerBien: 'si' | 'no' | '';
+
+  // Pregunta 18: Hace ejercicio
+  haceEjercicio: 'si' | 'no' | '';
+
+  // Pregunta 19: Problemas para dormir
+  problemasParaDormir: 'si' | 'no' | '';
+
+  // Preguntas 20-22: Fechas y días
+  fechaAtencion: Date;
+  fechaInicioLM: Date;
+  diasLicencia: string;
+
+  // Pregunta 23: Estudios de laboratorio
+  tieneEstudiosLaboratorio: 'si' | 'no' | '';
+
+  // Pregunta 24: Valoración especialista
+  tieneValoracionEspecialista: 'si' | 'no' | '';
+
+  // Pregunta 25: ELIMINADA (documento a enviar)
+
+  // Checkbox adicional
+  tieneCondicionPreexistente: boolean;
+  detalleCondicion?: string;
 }
 
 export interface DeclaracionJuradaDTO {
-  consentimiento: boolean;
-  version: string;
+  aceptaVeracidadInfo: boolean;
+  aceptaTratamientoDatos: boolean;
+  aceptaEnvioPorEmail: boolean;
+  versionConsentimiento: string;
   timestamp: number;
+  ip?: string;
 }
 
 export interface FirmaDTO {
   base64: string;
   timestamp: number;
+  deviceInfo?: string;
 }
 
 export interface FormularioCompleto {
@@ -55,7 +135,7 @@ export interface FormularioCompleto {
 }
 
 // ========================================
-// SERVICE MEJORADO
+// SERVICE
 // ========================================
 @Injectable({
   providedIn: 'root',

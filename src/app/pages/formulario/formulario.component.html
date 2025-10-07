@@ -58,24 +58,30 @@
     (dataChange)="onStepDataChange(1, $event)"
   ></app-datos-personales>
   } @case (2) {
-  <section class="step-placeholder">
-    <h2>Información del Empleador</h2>
-    <p>Componente en construcción...</p>
-  </section>
+
+  <app-informacion-empleador
+    [requestValidate]="triggerValidation()"
+    (validChange)="onStepValidChange(2, $event)"
+    (dataChange)="onStepDataChange(2, $event)"
+  ></app-informacion-empleador>
+
   } @case (3) {
-  <section class="step-placeholder">
-    <h2>Información Médica</h2>
-    <p>Componente en construcción...</p>
-  </section>
+  <app-informacion-medica
+    [requestValidate]="triggerValidation()"
+    (validChange)="onStepValidChange(3, $event)"
+    (dataChange)="onStepDataChange(3, $event)"
+  ></app-informacion-medica>
   } @case (4) {
-  <section class="step-placeholder">
-    <h2>Declaración Jurada</h2>
-    <p>Componente en construcción...</p>
-  </section>
+  <app-declaracion-jurada
+    [requestValidate]="triggerValidation()"
+    (validChange)="onStepValidChange(4, $event)"
+    (dataChange)="onStepDataChange(4, $event)"
+  ></app-declaracion-jurada>
   } @case (5) {
-  <section class="step-placeholder">
-    <h2>Firma Digital</h2>
-    <p>Componente en construcción...</p>
-  </section>
+  <app-firma
+    [requestValidate]="triggerValidation()"
+    (validChange)="onStepValidChange(5, $event)"
+    (dataChange)="onStepDataChange(5, $event)"
+  ></app-firma>
   } }
 </main>

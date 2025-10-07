@@ -1,1 +1,359 @@
-<p>informacion-medica works!</p>
+<section class="info-medica">
+  <h2 class="section-title">INFORMACIÓN MÉDICA</h2>
+  <p class="section-description">Complete su <strong>HISTORIAL MÉDICO</strong> completo.</p>
+
+  <form class="info-form" [formGroup]="form">
+    <div class="form-grid-single">
+      <!-- Pregunta 1 -->
+      <mat-form-field appearance="outline" class="form-field-full">
+        <mat-label>1. ¿Cuáles son los síntomas que presenta?*</mat-label>
+        <textarea matInput formControlName="sintomas" rows="3"></textarea>
+        @if (form.get('sintomas')?.invalid && form.get('sintomas')?.touched) {
+        <mat-error>Este campo es requerido</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Pregunta 2 -->
+      <mat-form-field appearance="outline" class="form-field-full">
+        <mat-label>2. ¿Desde cuándo iniciaron esos síntomas? (días, meses o años)*</mat-label>
+        <input matInput formControlName="cuandoInicioSintomas" />
+        @if (form.get('cuandoInicioSintomas')?.invalid && form.get('cuandoInicioSintomas')?.touched)
+        {
+        <mat-error>Este campo es requerido</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Pregunta 3 -->
+      <mat-form-field appearance="outline" class="form-field-full">
+        <mat-label
+          >3. ¿Usted sufre de alguna enfermedad crónica? (diabetes, presión alta, problemas del
+          corazón)*</mat-label
+        >
+        <mat-select formControlName="enfermedadCronica">
+          <mat-option value="si">Sí</mat-option>
+          <mat-option value="no">No</mat-option>
+        </mat-select>
+        @if (form.get('enfermedadCronica')?.invalid && form.get('enfermedadCronica')?.touched) {
+        <mat-error>Debe seleccionar una opción</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Pregunta 3.1: Campo condicional -->
+      @if (form.get('enfermedadCronica')?.value === 'si') {
+      <mat-form-field appearance="outline" class="form-field-full conditional">
+        <mat-label>¿Cuáles?*</mat-label>
+        <textarea matInput formControlName="detalleEnfermedadCronica" rows="2"></textarea>
+        @if (form.get('detalleEnfermedadCronica')?.invalid &&
+        form.get('detalleEnfermedadCronica')?.touched) {
+        <mat-error>Debe especificar las enfermedades</mat-error>
+        }
+      </mat-form-field>
+      }
+
+      <!-- Pregunta 4 -->
+      <mat-form-field appearance="outline" class="form-field-full">
+        <mat-label>4. ¿Usted sufre de alguna enfermedad mental?*</mat-label>
+        <mat-select formControlName="enfermedadMental">
+          <mat-option value="si">Sí</mat-option>
+          <mat-option value="no">No</mat-option>
+        </mat-select>
+        @if (form.get('enfermedadMental')?.invalid && form.get('enfermedadMental')?.touched) {
+        <mat-error>Debe seleccionar una opción</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Pregunta 4.1: Campo condicional -->
+      @if (form.get('enfermedadMental')?.value === 'si') {
+      <mat-form-field appearance="outline" class="form-field-full conditional">
+        <mat-label>¿Cuál?*</mat-label>
+        <textarea matInput formControlName="detalleEnfermedadMental" rows="2"></textarea>
+        @if (form.get('detalleEnfermedadMental')?.invalid &&
+        form.get('detalleEnfermedadMental')?.touched) {
+        <mat-error>Debe especificar la enfermedad</mat-error>
+        }
+      </mat-form-field>
+      }
+
+      <!-- Pregunta 5 -->
+      <mat-form-field appearance="outline" class="form-field-full">
+        <mat-label>5. ¿En algún momento de su vida le han realizado alguna cirugía?*</mat-label>
+        <mat-select formControlName="cirugiaPrevia">
+          <mat-option value="si">Sí</mat-option>
+          <mat-option value="no">No</mat-option>
+        </mat-select>
+        @if (form.get('cirugiaPrevia')?.invalid && form.get('cirugiaPrevia')?.touched) {
+        <mat-error>Debe seleccionar una opción</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Pregunta 6 -->
+      <mat-form-field appearance="outline" class="form-field-full">
+        <mat-label>6. ¿Ha tenido reacción alérgica a algún medicamento?*</mat-label>
+        <mat-select formControlName="reaccionAlergica">
+          <mat-option value="si">Sí</mat-option>
+          <mat-option value="no">No</mat-option>
+        </mat-select>
+        @if (form.get('reaccionAlergica')?.invalid && form.get('reaccionAlergica')?.touched) {
+        <mat-error>Debe seleccionar una opción</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Pregunta 6.1: Campo condicional -->
+      @if (form.get('reaccionAlergica')?.value === 'si') {
+      <mat-form-field appearance="outline" class="form-field-full conditional">
+        <mat-label>¿A cuál medicamento?*</mat-label>
+        <textarea matInput formControlName="detalleReaccionAlergica" rows="2"></textarea>
+        @if (form.get('detalleReaccionAlergica')?.invalid &&
+        form.get('detalleReaccionAlergica')?.touched) {
+        <mat-error>Debe especificar el medicamento</mat-error>
+        }
+      </mat-form-field>
+      }
+
+      <!-- Pregunta 7 -->
+      <mat-form-field appearance="outline" class="form-field-full">
+        <mat-label
+          >7. ¿Tiene antecedentes familiares? (Cáncer, patologías psiquiátricas, otras)*</mat-label
+        >
+        <mat-select formControlName="antecedenteFamiliar">
+          <mat-option value="si">Sí</mat-option>
+          <mat-option value="no">No</mat-option>
+        </mat-select>
+        @if (form.get('antecedenteFamiliar')?.invalid && form.get('antecedenteFamiliar')?.touched) {
+        <mat-error>Debe seleccionar una opción</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Pregunta 7.1: Campo condicional -->
+      @if (form.get('antecedenteFamiliar')?.value === 'si') {
+      <mat-form-field appearance="outline" class="form-field-full conditional">
+        <mat-label>¿Cuáles?*</mat-label>
+        <textarea matInput formControlName="detalleAntecedenteFamiliar" rows="2"></textarea>
+        @if (form.get('detalleAntecedenteFamiliar')?.invalid &&
+        form.get('detalleAntecedenteFamiliar')?.touched) {
+        <mat-error>Debe especificar los antecedentes</mat-error>
+        }
+      </mat-form-field>
+      }
+
+      <!-- Pregunta 8 -->
+      <mat-form-field appearance="outline" class="form-field-full">
+        <mat-label>8. ¿Cuál es su estado civil?*</mat-label>
+        <mat-select formControlName="estadoCivil">
+          <mat-option value="soltero">Soltero(a)</mat-option>
+          <mat-option value="casado">Casado(a)</mat-option>
+          <mat-option value="union-libre">Unión libre</mat-option>
+          <mat-option value="divorciado">Divorciado(a)</mat-option>
+          <mat-option value="viudo">Viudo(a)</mat-option>
+        </mat-select>
+        @if (form.get('estadoCivil')?.invalid && form.get('estadoCivil')?.touched) {
+        <mat-error>Debe seleccionar una opción</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Pregunta 9 -->
+      <mat-form-field appearance="outline" class="form-field-full">
+        <mat-label>9. ¿Tiene hijos?*</mat-label>
+        <mat-select formControlName="tieneHijos">
+          <mat-option value="si">Sí</mat-option>
+          <mat-option value="no">No</mat-option>
+        </mat-select>
+        @if (form.get('tieneHijos')?.invalid && form.get('tieneHijos')?.touched) {
+        <mat-error>Debe seleccionar una opción</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Pregunta 9.1: Campo condicional -->
+      @if (form.get('tieneHijos')?.value === 'si') {
+      <mat-form-field appearance="outline" class="form-field-full conditional">
+        <mat-label>¿Cuántos hijos?*</mat-label>
+        <input matInput formControlName="cuantosHijos" type="number" min="1" />
+        @if (form.get('cuantosHijos')?.invalid && form.get('cuantosHijos')?.touched) {
+        <mat-error>Debe especificar cuántos hijos tiene</mat-error>
+        }
+      </mat-form-field>
+      }
+
+      <!-- Pregunta 10 -->
+      <mat-form-field appearance="outline" class="form-field-full">
+        <mat-label>10. ¿Cuántas personas viven con usted?*</mat-label>
+        <input matInput formControlName="cuantasPersonasViven" type="number" min="0" />
+        @if (form.get('cuantasPersonasViven')?.invalid && form.get('cuantasPersonasViven')?.touched)
+        {
+        <mat-error>Este campo es requerido</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Pregunta 11: ELIMINADA -->
+
+      <!-- Pregunta 12 -->
+      <mat-form-field appearance="outline" class="form-field-full">
+        <mat-label>11. ¿Fuma?*</mat-label>
+        <mat-select formControlName="fuma">
+          <mat-option value="si">Sí</mat-option>
+          <mat-option value="no">No</mat-option>
+        </mat-select>
+        @if (form.get('fuma')?.invalid && form.get('fuma')?.touched) {
+        <mat-error>Debe seleccionar una opción</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Pregunta 13 -->
+      <mat-form-field appearance="outline" class="form-field-full">
+        <mat-label>12. ¿Consume bebidas alcohólicas?*</mat-label>
+        <mat-select formControlName="consumeAlcohol">
+          <mat-option value="si">Sí</mat-option>
+          <mat-option value="no">No</mat-option>
+        </mat-select>
+        @if (form.get('consumeAlcohol')?.invalid && form.get('consumeAlcohol')?.touched) {
+        <mat-error>Debe seleccionar una opción</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Pregunta 14 -->
+      <mat-form-field appearance="outline" class="form-field-full">
+        <mat-label>13. Por sus síntomas actuales, ¿tiene actualmente licencia médica?*</mat-label>
+        <mat-select formControlName="tieneLicenciaMedica">
+          <mat-option value="si">Sí</mat-option>
+          <mat-option value="no">No</mat-option>
+        </mat-select>
+        @if (form.get('tieneLicenciaMedica')?.invalid && form.get('tieneLicenciaMedica')?.touched) {
+        <mat-error>Debe seleccionar una opción</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Pregunta 15 -->
+      <mat-form-field appearance="outline" class="form-field-full">
+        <mat-label>14. ¿Cuál es su peso en kilos?*</mat-label>
+        <input matInput formControlName="pesoKilos" type="number" placeholder="Ej: 70" />
+        @if (form.get('pesoKilos')?.invalid && form.get('pesoKilos')?.touched) {
+        <mat-error>Este campo es requerido</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Pregunta 16 -->
+      <mat-form-field appearance="outline" class="form-field-full">
+        <mat-label>15. ¿Cuánto mide / cuál es su estatura?*</mat-label>
+        <input matInput formControlName="estaturaMetros" placeholder="Ej: 1.75 m" />
+        @if (form.get('estaturaMetros')?.invalid && form.get('estaturaMetros')?.touched) {
+        <mat-error>Este campo es requerido</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Pregunta 17 -->
+      <mat-form-field appearance="outline" class="form-field-full">
+        <mat-label>16. ¿Puede comer bien?*</mat-label>
+        <mat-select formControlName="puedeComerBien">
+          <mat-option value="si">Sí</mat-option>
+          <mat-option value="no">No</mat-option>
+        </mat-select>
+        @if (form.get('puedeComerBien')?.invalid && form.get('puedeComerBien')?.touched) {
+        <mat-error>Debe seleccionar una opción</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Pregunta 18 -->
+      <mat-form-field appearance="outline" class="form-field-full">
+        <mat-label>17. ¿Está haciendo ejercicio?*</mat-label>
+        <mat-select formControlName="haceEjercicio">
+          <mat-option value="si">Sí</mat-option>
+          <mat-option value="no">No</mat-option>
+        </mat-select>
+        @if (form.get('haceEjercicio')?.invalid && form.get('haceEjercicio')?.touched) {
+        <mat-error>Debe seleccionar una opción</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Pregunta 19 -->
+      <mat-form-field appearance="outline" class="form-field-full">
+        <mat-label>18. ¿Tiene problemas para dormir en la noche?*</mat-label>
+        <mat-select formControlName="problemasParaDormir">
+          <mat-option value="si">Sí</mat-option>
+          <mat-option value="no">No</mat-option>
+        </mat-select>
+        @if (form.get('problemasParaDormir')?.invalid && form.get('problemasParaDormir')?.touched) {
+        <mat-error>Debe seleccionar una opción</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Preguntas 20-22: Fechas -->
+      <div class="date-group">
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>19. ¿Fecha que desea ser atendido?*</mat-label>
+          <input matInput [matDatepicker]="picker1" formControlName="fechaAtencion" />
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+          @if (form.get('fechaAtencion')?.invalid && form.get('fechaAtencion')?.touched) {
+          <mat-error>Este campo es requerido</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>20. Fecha de inicio de la LM*</mat-label>
+          <input matInput [matDatepicker]="picker2" formControlName="fechaInicioLM" />
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+          @if (form.get('fechaInicioLM')?.invalid && form.get('fechaInicioLM')?.touched) {
+          <mat-error>Este campo es requerido</mat-error>
+          }
+        </mat-form-field>
+      </div>
+
+      <mat-form-field appearance="outline" class="form-field-full">
+        <mat-label>21. ¿Cuántos días de licencia?*</mat-label>
+        <input matInput formControlName="diasLicencia" type="number" />
+        @if (form.get('diasLicencia')?.invalid && form.get('diasLicencia')?.touched) {
+        <mat-error>Este campo es requerido</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Pregunta 23 -->
+      <mat-form-field appearance="outline" class="form-field-full">
+        <mat-label
+          >22. ¿Se ha realizado algún estudio de laboratorio o imagen en los últimos 6
+          meses?*</mat-label
+        >
+        <mat-select formControlName="tieneEstudiosLaboratorio">
+          <mat-option value="si">Sí</mat-option>
+          <mat-option value="no">No</mat-option>
+        </mat-select>
+        @if (form.get('tieneEstudiosLaboratorio')?.invalid &&
+        form.get('tieneEstudiosLaboratorio')?.touched) {
+        <mat-error>Debe seleccionar una opción</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Pregunta 24 -->
+      <mat-form-field appearance="outline" class="form-field-full">
+        <mat-label>23. ¿Tiene algún documento de valoración por cualquier especialista?*</mat-label>
+        <mat-select formControlName="tieneValoracionEspecialista">
+          <mat-option value="si">Sí</mat-option>
+          <mat-option value="no">No</mat-option>
+        </mat-select>
+        @if (form.get('tieneValoracionEspecialista')?.invalid &&
+        form.get('tieneValoracionEspecialista')?.touched) {
+        <mat-error>Debe seleccionar una opción</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Pregunta 25: ELIMINADA -->
+
+      <!-- Checkbox adicional -->
+      <div class="checkbox-field">
+        <mat-checkbox formControlName="tieneCondicionPreexistente">
+          ¿Tiene alguna condición médica preexistente adicional?
+        </mat-checkbox>
+      </div>
+
+      @if (form.get('tieneCondicionPreexistente')?.value) {
+      <mat-form-field appearance="outline" class="form-field-full conditional">
+        <mat-label>Detalle de la Condición*</mat-label>
+        <textarea matInput formControlName="detalleCondicion" rows="3"></textarea>
+        @if (form.get('detalleCondicion')?.invalid && form.get('detalleCondicion')?.touched) {
+        <mat-error>Debe especificar la condición</mat-error>
+        }
+      </mat-form-field>
+      }
+    </div>
+  </form>
+</section>

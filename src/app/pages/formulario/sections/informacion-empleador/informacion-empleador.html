@@ -1,1 +1,87 @@
-<p>informacion-empleador works!</p>
+<section class="info-empleador">
+  <h2 class="section-title">INFORMACIÓN DEL EMPLEADOR</h2>
+  <p class="section-description">
+    Complete la información sobre su <strong>EMPLEADOR ACTUAL</strong>.
+  </p>
+
+  <form class="info-form" [formGroup]="form">
+    <div class="form-grid">
+      <!-- Fila 1 -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Nombre de la Empresa**</mat-label>
+        <input matInput formControlName="empresaNombre" placeholder="Ej: Acme Corp." />
+        @if (form.get('empresaNombre')?.invalid && form.get('empresaNombre')?.touched) {
+        <mat-error>Este campo es requerido</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>RUT de la Empresa**</mat-label>
+        <input matInput formControlName="empresaRut" placeholder="Ej: 76.123.456-7" />
+        @if (form.get('empresaRut')?.invalid && form.get('empresaRut')?.touched) {
+        <mat-error>Este campo es requerido</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Cargo**</mat-label>
+        <input matInput formControlName="cargo" placeholder="Ej: Desarrollador Frontend" />
+        @if (form.get('cargo')?.invalid && form.get('cargo')?.touched) {
+        <mat-error>Este campo es requerido</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Fila 2 -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Fecha de Ingreso**</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="fechaIngreso" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        @if (form.get('fechaIngreso')?.invalid && form.get('fechaIngreso')?.touched) {
+        <mat-error>Este campo es requerido</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Tipo de Contrato**</mat-label>
+        <mat-select formControlName="tipoContrato">
+          <mat-option value="indefinido">Indefinido</mat-option>
+          <mat-option value="plazo-fijo">Plazo Fijo</mat-option>
+          <mat-option value="honorarios">Honorarios</mat-option>
+          <mat-option value="otro">Otro</mat-option>
+        </mat-select>
+        @if (form.get('tipoContrato')?.invalid && form.get('tipoContrato')?.touched) {
+        <mat-error>Este campo es requerido</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Teléfono de la Empresa**</mat-label>
+        <input matInput formControlName="telefonoEmpresa" placeholder="Ej: +56 2 1234 5678" />
+        @if (form.get('telefonoEmpresa')?.invalid && form.get('telefonoEmpresa')?.touched) {
+        <mat-error>Este campo es requerido</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Fila 3 -->
+      <mat-form-field appearance="outline" class="form-field full-width">
+        <mat-label>Dirección de la Empresa**</mat-label>
+        <input matInput formControlName="direccionEmpresa" placeholder="Calle, número, comuna" />
+        @if (form.get('direccionEmpresa')?.invalid && form.get('direccionEmpresa')?.touched) {
+        <mat-error>Este campo es requerido</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Fila 4 - Datos opcionales del supervisor -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Nombre del Supervisor (opcional)</mat-label>
+        <input matInput formControlName="nombreSupervisor" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Teléfono del Supervisor (opcional)</mat-label>
+        <input matInput formControlName="telefonoSupervisor" />
+      </mat-form-field>
+    </div>
+  </form>
+</section>

@@ -1,0 +1,27 @@
+/* grid del formulario */
+.info-empleador .form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px 32px;
+}
+
+.info-empleador .form-field {
+  width: 100%;
+}
+
+/* dirección ocupa el ancho completo */
+.info-empleador .form-field.full-width {
+  grid-column: 1 / -1;
+}
+
+/* breakpoints */
+@media (max-width: 1024px) {
+  .info-empleador .form-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 640px) {
+  .info-empleador .form-grid {
+    grid-template-columns: 1fr;
+  }
+}

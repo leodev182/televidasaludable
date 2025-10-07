@@ -1,0 +1,123 @@
+.declaracion-jurada {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: #115e5e;
+}
+
+.legal-text {
+  background: #f9f9f9;
+  border-left: 4px solid #115e5e;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: 4px;
+
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: #333;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    color: #555;
+  }
+
+  ul {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+
+    li {
+      margin-bottom: 0.5rem;
+      line-height: 1.6;
+      color: #555;
+    }
+  }
+
+  strong {
+    color: #115e5e;
+    font-weight: 600;
+  }
+}
+
+.warning-text {
+  background: #fff3cd;
+  border: 1px solid #ffc107;
+  padding: 1rem;
+  border-radius: 4px;
+  color: #856404;
+
+  strong {
+    color: #856404;
+  }
+}
+
+.consent-form {
+  margin-top: 2rem;
+}
+
+.checkbox-group {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  background: white;
+
+  mat-checkbox {
+    ::ng-deep .mat-mdc-checkbox-label {
+      line-height: 1.6;
+      color: #333;
+    }
+  }
+
+  .error-text {
+    color: #f44336;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    margin-left: 32px; // Alinear con el texto del checkbox
+  }
+}
+
+.legal-footer {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 2px solid #e0e0e0;
+  text-align: center;
+
+  p {
+    margin-bottom: 0.5rem;
+    color: #666;
+  }
+
+  small {
+    font-size: 0.875rem;
+  }
+
+  strong {
+    color: #115e5e;
+  }
+}
+
+@media (max-width: 768px) {
+  .declaracion-jurada {
+    padding: 1rem;
+  }
+
+  .legal-text {
+    padding: 1rem;
+  }
+}

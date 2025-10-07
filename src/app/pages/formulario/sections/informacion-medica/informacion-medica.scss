@@ -1,0 +1,69 @@
+.info-medica {
+  display: block;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.section-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.section-description {
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+// Grid de 1 columna (full width para todos)
+.form-grid-single {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-field-full {
+  width: 100%;
+}
+
+// ... estilos anteriores ...
+
+.conditional {
+  margin-left: 2rem;
+  border-left: 3px solid #115e5e;
+  padding-left: 1rem;
+}
+
+// Grid especial para las 2 fechas juntas
+.date-group {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Checkbox
+.checkbox-field {
+  padding: 1rem 0;
+
+  mat-checkbox {
+    font-size: 1rem;
+  }
+}
+
+// Estilos de Material (herencia de datos-personales)
+.form-field-full,
+.form-field {
+  .mat-mdc-form-field-appearance-outline .mdc-notched-outline {
+    border-radius: 8px;
+  }
+
+  .mat-mdc-form-field-appearance-outline .mdc-notched-outline__leading,
+  .mat-mdc-form-field-appearance-outline .mdc-notched-outline__trailing {
+    border-color: #115e5e !important;
+  }
+}

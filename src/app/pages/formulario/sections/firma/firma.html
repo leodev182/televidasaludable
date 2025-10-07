@@ -1,1 +1,44 @@
-<p>firma works!</p>
+<section class="firma-section">
+  <h2 class="section-title">FIRMA DIGITAL</h2>
+
+  <div class="instructions">
+    <mat-icon>edit</mat-icon>
+    <p>
+      Por favor, <strong>firme en el recuadro</strong> usando su mouse, trackpad o dedo (en
+      dispositivos táctiles). Su firma digital tendrá validez legal según la
+      <strong>Ley 19.799</strong> sobre documentos electrónicos.
+    </p>
+  </div>
+
+  <div class="canvas-container">
+    <canvas #signatureCanvas></canvas>
+
+    @if (!isSigned) {
+    <div class="placeholder-text">Firme aquí</div>
+    }
+  </div>
+
+  <div class="actions">
+    <button mat-stroked-button color="warn" (click)="limpiarFirma()" [disabled]="!isSigned">
+      <mat-icon>delete</mat-icon>
+      Limpiar Firma
+    </button>
+  </div>
+
+  @if (isSigned) {
+  <div class="success-message">
+    <mat-icon color="primary">check_circle</mat-icon>
+    <p>Firma capturada correctamente</p>
+  </div>
+  }
+
+  <div class="legal-notice">
+    <p>
+      <small>
+        Al firmar este documento, usted acepta todos los términos y condiciones expresados en la
+        Declaración Jurada del paso anterior. Esta firma tiene validez legal y será incluida en el
+        documento PDF que recibirá por email.
+      </small>
+    </p>
+  </div>
+</section>

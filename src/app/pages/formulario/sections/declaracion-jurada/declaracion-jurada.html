@@ -1,1 +1,98 @@
-<p>declaracion-jurada works!</p>
+<section class="declaracion-jurada">
+  <h2 class="section-title">DECLARACIÓN JURADA Y CONSENTIMIENTO INFORMADO</h2>
+
+  <div class="legal-text">
+    <h3>Marco Legal</h3>
+    <p>
+      Este formulario cumple con la normativa vigente sobre atención médica y telemedicina en Chile,
+      amparado en la <strong>Ley 21.541</strong> (Telemedicina) y la <strong>Ley 21.746</strong>
+      (Atención Médica Virtual).
+    </p>
+
+    <h3>Protección de Datos Personales</h3>
+    <p>
+      Toda la información proporcionada será tratada conforme a la <strong>Ley 19.628</strong> sobre
+      protección de la vida privada y la <strong>Ley 20.584</strong> sobre derechos y deberes de los
+      pacientes.
+    </p>
+
+    <h3>Tratamiento de la Información</h3>
+    <p>
+      Sus datos serán enviados de forma segura mediante <strong>cifrado TLS</strong> por correo
+      electrónico directamente a Alma Nova Clinic. No almacenamos sus datos en servidores externos.
+      La información será utilizada exclusivamente para:
+    </p>
+    <ul>
+      <li>Evaluación médica pre-ocupacional</li>
+      <li>Atención médica virtual</li>
+      <li>Cumplimiento de requerimientos legales y sanitarios</li>
+    </ul>
+
+    <h3>Veracidad de la Información</h3>
+    <p class="warning-text">
+      <strong>IMPORTANTE:</strong> Entregar información falsa o inexacta puede constituir delito,
+      sancionado por los artículos <strong>193, 210 y 212 del Código Penal Chileno</strong>, además
+      de afectar la calidad de su atención médica.
+    </p>
+
+    <h3>Consentimiento para Telemedicina</h3>
+    <p>
+      Al aceptar, usted consiente recibir atención médica mediante telemedicina, comprendiendo que
+      esta modalidad implica limitaciones en el examen físico directo, pero cumple con los
+      estándares de calidad establecidos por la normativa vigente.
+    </p>
+  </div>
+
+  <form [formGroup]="form" class="consent-form">
+    <div class="checkbox-group">
+      <mat-checkbox formControlName="aceptaVeracidadInfo">
+        <strong>Declaro bajo juramento</strong> que toda la información proporcionada en este
+        formulario es verídica y completa. Comprendo que entregar información falsa puede tener
+        consecuencias legales y afectar mi atención médica.*
+      </mat-checkbox>
+      @if (form.get('aceptaVeracidadInfo')?.invalid && form.get('aceptaVeracidadInfo')?.touched) {
+      <p class="error-text">Debe aceptar la veracidad de la información</p>
+      }
+    </div>
+
+    <div class="checkbox-group">
+      <mat-checkbox formControlName="aceptaTratamientoDatos">
+        <strong>Autorizo el tratamiento de mis datos personales</strong> según la Ley 19.628,
+        comprendiendo que serán utilizados exclusivamente para fines clínicos, administrativos y de
+        cumplimiento legal. Entiendo mis derechos de acceso, rectificación y cancelación de datos.*
+      </mat-checkbox>
+      @if (form.get('aceptaTratamientoDatos')?.invalid &&
+      form.get('aceptaTratamientoDatos')?.touched) {
+      <p class="error-text">Debe autorizar el tratamiento de datos personales</p>
+      }
+    </div>
+
+    <div class="checkbox-group">
+      <mat-checkbox formControlName="aceptaEnvioPorEmail">
+        <strong>Consiento el envío de mis datos mediante email cifrado (TLS)</strong> directamente a
+        Alma Nova Clinic, comprendiendo que este es el método de transmisión utilizado y que no se
+        almacenan en servidores externos. Recibiré una copia de esta declaración jurada firmada en
+        mi correo electrónico.*
+      </mat-checkbox>
+      @if (form.get('aceptaEnvioPorEmail')?.invalid && form.get('aceptaEnvioPorEmail')?.touched) {
+      <p class="error-text">Debe consentir el envío por email cifrado</p>
+      }
+    </div>
+
+    <div class="legal-footer">
+      <p>
+        <small>
+          Al firmar este documento en el siguiente paso, usted acepta todos los términos y
+          condiciones aquí expuestos. Su firma digital tendrá validez legal según la
+          <strong>Ley 19.799</strong> sobre documentos electrónicos y firma electrónica.
+        </small>
+      </p>
+      <p>
+        <small>
+          Versión del documento: <strong>{{ VERSION_CONSENTIMIENTO }}</strong> | Fecha:
+          {{ getCurrentDate() }}
+        </small>
+      </p>
+    </div>
+  </form>
+</section>

@@ -37,9 +37,26 @@
       Siguiente →
     </button>
     } @else {
-    <button mat-raised-button color="accent" (click)="enviar()" [disabled]="!canSubmit()">
-      ✓ Enviar
+    <button
+      mat-raised-button
+      color="accent"
+      (click)="enviar()"
+      [disabled]="!canSubmit() || submitState().status !== 'idle'"
+    >
+      @switch (submitState().status) { @case ('generating-pdf') {
+      <mat-spinner diameter="20" style="display: inline-block; margin-right: 8px"></mat-spinner>
+      Generando PDF... } @case ('sending-email') {
+      <mat-spinner diameter="20" style="display: inline-block; margin-right: 8px"></mat-spinner>
+      Enviando... } @case ('success') { ✓ ¡Enviado! } @case ('error') { ✗ Error - Reintentar }
+      @default { ✓ Enviar } }
     </button>
+    }
+
+    <!-- Mensaje de error (debajo de los botones) -->
+    @if (submitState().status === 'error' && submitState().error) {
+    <div class="error-message">
+      {{ submitState().error }}
+    </div>
     }
   </div>
 </header>

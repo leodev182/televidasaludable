@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import jsPDF from 'jspdf';
 import { FormularioCompleto } from './formulario-data.service';
-import { LoggerService } from './logger.service';
+import { LoggerService } from '../shared/services/logger.service';
 
 @Injectable({
   providedIn: 'root',

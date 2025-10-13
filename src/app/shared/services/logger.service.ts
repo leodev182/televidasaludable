@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../enviroments/enviroment';
+import { environment } from '../../../enviroments/enviroment';
 
 export enum LogLevel {
   DEBUG = 0,

@@ -1,5 +1,5 @@
 import { Injectable, signal, effect, inject } from '@angular/core';
-import { LoggerService } from './logger.service';
+import { LoggerService } from '../shared/services/logger.service';
 
 // ========================================
 // INTERFACES (las mismas que antes)

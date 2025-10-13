@@ -18,7 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
 import SignaturePad from 'signature_pad';
 
 import { FormularioDataService, FirmaDTO } from '../../../../services/formulario-data.service';
-import { LoggerService } from '../../../../services/logger.service';
+import { LoggerService } from '../../../../shared/services/logger.service';
 
 @Component({
   selector: 'app-firma',

@@ -6,12 +6,16 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { Bienvenida } from './sections/bienvenida/bienvenida';
 import { DatosPersonalesComponent } from './sections/datos-personales/datos-personales';
 import { FormularioDataService, FormularioCompleto } from '../../services/formulario-data.service';
-import { LoggerService } from '../../services/logger.service';
+import { LoggerService } from '../../shared/services/logger.service';
 import { RestoreDraftDialogComponent } from '../../shared/restore-draft-dialog/restore-draft-dialog.component';
 import { InformacionEmpleadorComponent } from './sections/informacion-empleador/informacion-empleador';
 import { InformacionMedicaComponent } from './sections/informacion-medica/informacion-medica';
 import { DeclaracionJuradaComponent } from './sections/declaracion-jurada/declaracion-jurada';
 import { FirmaComponent } from './sections/firma/firma';
+
+import { EmailService } from '../../shared/services/email.service';
+import { PdfGeneratorService } from '../../services/pdf-generator.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-formulario',
@@ -20,6 +24,7 @@ import { FirmaComponent } from './sections/firma/firma';
     CommonModule,
     MatButtonModule,
     MatDialogModule,
+    MatProgressSpinnerModule,
     Bienvenida,
     DatosPersonalesComponent,
     InformacionEmpleadorComponent,
@@ -34,6 +39,8 @@ export class FormularioComponent implements OnInit {
   private logger = inject(LoggerService);
   private dataService = inject(FormularioDataService);
   private dialog = inject(MatDialog);
+  private emailService = inject(EmailService);
+  private pdfGenerator = inject(PdfGeneratorService);
 
   pasoActual = signal(0);
   readonly totalPasos = 6;
@@ -183,34 +190,114 @@ export class FormularioComponent implements OnInit {
       return;
     }
 
+    this.logger.info('FormularioComponent', '🚀 Proceso de envío iniciado');
+    this.logger.time('Envío total');
+
     try {
-      this.submitState.set({ status: 'generating-pdf', progress: 0 });
-      this.logger.info('FormularioComponent', 'Iniciando generación de PDF...');
-
+      // 1. Obtener snapshot completo
+      this.submitState.set({ status: 'generating-pdf', progress: 10 });
       const snapshot = this.dataService.snapshot();
+      this.logger.info('FormularioComponent', 'Snapshot obtenido', snapshot);
 
-      await this.delay(2000);
+      // 2. Validar que tengamos todos los datos necesarios
+      if (!snapshot.datosPersonales?.email) {
+        throw new Error('Email del paciente no encontrado');
+      }
+
+      // 3. Generar PDFs
+      this.submitState.set({ status: 'generating-pdf', progress: 30 });
+      this.logger.info('FormularioComponent', 'Generando PDFs...');
+
+      const clinicaPdfBlob = this.pdfGenerator.generateCompletePDF(snapshot);
+      const pacientePdfBlob = this.pdfGenerator.generateConsentPDF(snapshot);
+
+      this.logger.success('FormularioComponent', 'PDFs generados', {
+        clinicaSize: (clinicaPdfBlob.size / 1024).toFixed(2) + ' KB',
+        pacienteSize: (pacientePdfBlob.size / 1024).toFixed(2) + ' KB',
+      });
+
+      // 4. Convertir Blobs a Base64
       this.submitState.set({ status: 'generating-pdf', progress: 50 });
+      this.logger.debug('FormularioComponent', 'Convirtiendo PDFs a Base64...');
 
-      this.submitState.set({ status: 'sending-email', progress: 75 });
-      this.logger.info('FormularioComponent', 'Enviando email...');
+      const clinicaPdf = await this.blobToBase64(clinicaPdfBlob);
+      const pacientePdf = await this.blobToBase64(pacientePdfBlob);
 
-      await this.delay(2000);
+      // 5. Enviar email
+      this.submitState.set({ status: 'sending-email', progress: 70 });
+      this.logger.info('FormularioComponent', 'Enviando email a Resend...');
 
+      const emailRequest = {
+        clinicaPdf,
+        pacientePdf,
+        datosPersonales: {
+          nombres: snapshot.datosPersonales.nombres,
+          apellidos: snapshot.datosPersonales.apellidos,
+          email: snapshot.datosPersonales.email,
+          run: snapshot.datosPersonales.run,
+        },
+      };
+
+      // Llamada al servicio (observable convertido a Promise)
+      const response = await new Promise<any>((resolve, reject) => {
+        this.emailService.sendForm(emailRequest).subscribe({
+          next: (res) => resolve(res),
+          error: (err) => reject(err),
+        });
+      });
+
+      // 6. Éxito
       this.submitState.set({ status: 'success', progress: 100 });
-      this.logger.success('FormularioComponent', 'Formulario enviado exitosamente');
+      this.logger.success('FormularioComponent', '✅ Formulario enviado exitosamente', {
+        messageId: response.messageId,
+      });
 
+      // 7. Limpiar después de 3 segundos
       setTimeout(() => {
         this.dataService.reset();
         this.submitState.set({ status: 'idle' });
       }, 3000);
-    } catch (error) {
-      this.logger.error('FormularioComponent', 'Error al enviar formulario', error);
+    } catch (error: any) {
+      this.logger.error('FormularioComponent', '❌ Error al enviar formulario', error);
+
       this.submitState.set({
         status: 'error',
-        error: 'Ocurrió un error al enviar el formulario. Por favor intenta nuevamente.',
+        error:
+          error.message ||
+          'Ocurrió un error al enviar el formulario. Por favor intenta nuevamente.',
       });
+
+      setTimeout(() => {
+        if (this.submitState().status === 'error') {
+          this.submitState.set({ status: 'idle' });
+        }
+      }, 5000);
+    } finally {
+      this.logger.timeEnd('Envío total');
+      this.logger.info('FormularioComponent', 'Proceso finalizado');
     }
+  }
+
+  /**
+   * Convierte un Blob a Base64 (sin el prefijo data:)
+   */
+  private blobToBase64(blob: Blob): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        const base64 = reader.result as string;
+        // Remover el prefijo "data:application/pdf;base64,"
+        const base64Data = base64.split(',')[1];
+        resolve(base64Data);
+      };
+
+      reader.onerror = () => {
+        reject(new Error('Error al convertir PDF a Base64'));
+      };
+
+      reader.readAsDataURL(blob);
+    });
   }
 
   private delay(ms: number): Promise<void> {

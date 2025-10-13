@@ -25,7 +25,7 @@ import {
   FormularioDataService,
   InformacionMedicaDTO,
 } from '../../../../services/formulario-data.service';
-import { LoggerService } from '../../../../services/logger.service';
+import { LoggerService } from '../../../../shared/services/logger.service';
 
 @Component({
   selector: 'app-informacion-medica',

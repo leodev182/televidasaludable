@@ -21,7 +21,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     // Email a la clínica
     await resend.emails.send({
-      from: 'televidasaludable@gmail.com', // Cambiar por tu dominio
+      from: 'onboarding@resend.dev',
       to: process.env.CLINICA_EMAIL!,
       subject: `Formulario Pre-Ocupacional - ${datosPersonales.nombres} ${datosPersonales.run}`,
       html: `
@@ -41,7 +41,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     // Email al paciente
     await resend.emails.send({
-      from: 'formularios@tudominio.com',
+      from: 'onboarding@resend.dev',
       to: datosPersonales.email,
       subject: 'Copia de su Declaración Jurada - Alma Nova Clinic',
       html: `

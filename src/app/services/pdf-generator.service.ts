@@ -1,5 +1,4 @@
 import { Injectable, inject } from '@angular/core';
-import jsPDF from 'jspdf';
 import { FormularioCompleto } from './formulario-data.service';
 import { LoggerService } from '../shared/services/logger.service';
 
@@ -12,15 +11,18 @@ export class PdfGeneratorService {
   /**
    * Genera PDF completo para la clínica (ficha técnica completa)
    */
-  generateCompletePDF(data: FormularioCompleto): Blob {
+  async generateCompletePDF(data: FormularioCompleto): Promise<Blob> {
     this.logger.info('PDFGenerator', 'Generando PDF completo para clínica');
+
+    // Lazy load de jsPDF
+    const { default: jsPDF } = await import('jspdf');
 
     const doc = new jsPDF();
     let yPosition = 20;
 
     // Header
     doc.setFontSize(18);
-    doc.setTextColor(17, 94, 94); // Verde de la clínica
+    doc.setTextColor(17, 94, 94);
     doc.text('FORMULARIO PRE-OCUPACIONAL', 105, yPosition, { align: 'center' });
     yPosition += 10;
 
@@ -29,7 +31,6 @@ export class PdfGeneratorService {
     doc.text('Alma Nova Clinic', 105, yPosition, { align: 'center' });
     yPosition += 15;
 
-    // Línea separadora
     doc.setDrawColor(17, 94, 94);
     doc.line(20, yPosition, 190, yPosition);
     yPosition += 10;
@@ -82,7 +83,6 @@ export class PdfGeneratorService {
       doc.text('FIRMA DIGITAL', 20, yPosition);
       yPosition += 8;
 
-      // Agregar imagen de la firma
       try {
         doc.addImage(data.firma.base64, 'PNG', 20, yPosition, 80, 40);
         yPosition += 45;
@@ -118,8 +118,11 @@ export class PdfGeneratorService {
   /**
    * Genera PDF solo con declaración jurada para el paciente
    */
-  generateConsentPDF(data: FormularioCompleto): Blob {
+  async generateConsentPDF(data: FormularioCompleto): Promise<Blob> {
     this.logger.info('PDFGenerator', 'Generando PDF de consentimiento para paciente');
+
+    // Lazy load de jsPDF
+    const { default: jsPDF } = await import('jspdf');
 
     const doc = new jsPDF();
     let yPosition = 20;
@@ -237,7 +240,7 @@ export class PdfGeneratorService {
   }
 
   // Métodos auxiliares
-  private addSection(doc: jsPDF, yPosition: number, title: string, data: any): number {
+  private addSection(doc: any, yPosition: number, title: string, data: any): number {
     if (!data) return yPosition;
 
     yPosition = this.checkPageBreak(doc, yPosition, 30);
@@ -269,7 +272,7 @@ export class PdfGeneratorService {
     return yPosition;
   }
 
-  private checkPageBreak(doc: jsPDF, yPosition: number, requiredSpace: number): number {
+  private checkPageBreak(doc: any, yPosition: number, requiredSpace: number): number {
     if (yPosition + requiredSpace > 280) {
       doc.addPage();
       return 20;

@@ -208,8 +208,8 @@ export class FormularioComponent implements OnInit {
       this.submitState.set({ status: 'generating-pdf', progress: 30 });
       this.logger.info('FormularioComponent', 'Generando PDFs...');
 
-      const clinicaPdfBlob = this.pdfGenerator.generateCompletePDF(snapshot);
-      const pacientePdfBlob = this.pdfGenerator.generateConsentPDF(snapshot);
+      const clinicaPdfBlob = await this.pdfGenerator.generateCompletePDF(snapshot);
+      const pacientePdfBlob = await this.pdfGenerator.generateConsentPDF(snapshot);
 
       this.logger.success('FormularioComponent', 'PDFs generados', {
         clinicaSize: (clinicaPdfBlob.size / 1024).toFixed(2) + ' KB',

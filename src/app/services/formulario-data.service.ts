@@ -276,6 +276,39 @@ export class FormularioDataService {
   }
 
   getLastCompletedStep(): number {
+    this.logger.debug('DataService', 'Calculando último paso completado...');
+
+    try {
+      const draftStr = sessionStorage.getItem(this.STORAGE_KEY);
+      if (draftStr) {
+        const draft: FormularioCompleto = JSON.parse(draftStr);
+
+        if (draft.firma) {
+          this.logger.debug('DataService', 'Último paso: 5 (Firma)');
+          return 5;
+        }
+        if (draft.declaracionJurada) {
+          this.logger.debug('DataService', 'Último paso: 4 (Declaración)');
+          return 4;
+        }
+        if (draft.informacionMedica) {
+          this.logger.debug('DataService', 'Último paso: 3 (Info Médica)');
+          return 3;
+        }
+        if (draft.informacionEmpleador) {
+          this.logger.debug('DataService', 'Último paso: 2 (Info Empleador)');
+          return 2;
+        }
+        if (draft.datosPersonales) {
+          this.logger.debug('DataService', 'Último paso: 1 (Datos Personales)');
+          return 1;
+        }
+      }
+    } catch (error) {
+      this.logger.error('DataService', 'Error al leer draft para calcular paso', error);
+    }
+
+    // Fallback: usar el signal actual
     const current = this.snapshot();
 
     if (current.firma) return 5;
@@ -284,6 +317,7 @@ export class FormularioDataService {
     if (current.informacionEmpleador) return 2;
     if (current.datosPersonales) return 1;
 
+    this.logger.debug('DataService', 'Último paso: 0 (ninguno completado)');
     return 0;
   }
 }

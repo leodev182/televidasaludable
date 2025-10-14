@@ -119,16 +119,26 @@ export class FormularioComponent implements OnInit {
   }
 
   private restoreDraft(): void {
+    this.logger.info('FormularioComponent', 'Restaurando draft...');
+
     const draft = this.dataService.restoreDraft();
 
-    if (!draft) return;
+    if (!draft) {
+      this.logger.warn('FormularioComponent', 'No hay draft para restaurar');
+      return;
+    }
 
     const lastStep = this.dataService.getLastCompletedStep();
     const bienvenidaCompletada = draft.metadata?.bienvenidaCompletada;
 
-    if (bienvenidaCompletada && lastStep >= 1) {
-      this.pasoActual.set(lastStep);
+    this.logger.debug('FormularioComponent', 'Draft info', {
+      lastStep,
+      bienvenidaCompletada,
+      pasoActual: this.pasoActual(),
+    });
 
+    if (bienvenidaCompletada && lastStep >= 1) {
+      // Marcar pasos anteriores como válidos
       for (let i = 1; i <= lastStep; i++) {
         this.stepValid.update((current) => ({
           ...current,
@@ -136,7 +146,11 @@ export class FormularioComponent implements OnInit {
         }));
       }
 
-      this.logger.info('FormularioComponent', `Continuando en el paso ${lastStep}`);
+      // CRÍTICO: Usar setTimeout para que Angular actualice después del diálogo
+      setTimeout(() => {
+        this.pasoActual.set(lastStep);
+        this.logger.success('FormularioComponent', `Navegando al paso ${lastStep}`);
+      }, 100);
     } else {
       this.logger.info('FormularioComponent', 'Bienvenida no completada, iniciando desde paso 0');
       this.pasoActual.set(0);

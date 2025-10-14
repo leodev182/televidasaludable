@@ -102,8 +102,6 @@ export class InformacionMedicaComponent implements OnInit, OnDestroy {
       problemasParaDormir: [existingData?.problemasParaDormir || '', Validators.required],
 
       fechaAtencion: [existingData?.fechaAtencion || '', Validators.required],
-      fechaInicioLM: [existingData?.fechaInicioLM || '', Validators.required],
-      diasLicencia: [existingData?.diasLicencia || '', Validators.required],
 
       tieneEstudiosLaboratorio: [existingData?.tieneEstudiosLaboratorio || '', Validators.required],
       tieneValoracionEspecialista: [

@@ -276,41 +276,21 @@
         }
       </mat-form-field>
 
-      <!-- Preguntas 20-22: Fechas -->
-      <div class="date-group">
-        <mat-form-field appearance="outline" class="form-field">
-          <mat-label>19. ¿Fecha que desea ser atendido?*</mat-label>
-          <input matInput [matDatepicker]="picker1" formControlName="fechaAtencion" />
-          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-          <mat-datepicker #picker1></mat-datepicker>
-          @if (form.get('fechaAtencion')?.invalid && form.get('fechaAtencion')?.touched) {
-          <mat-error>Este campo es requerido</mat-error>
-          }
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" class="form-field">
-          <mat-label>20. Fecha de inicio de la LM*</mat-label>
-          <input matInput [matDatepicker]="picker2" formControlName="fechaInicioLM" />
-          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-          <mat-datepicker #picker2></mat-datepicker>
-          @if (form.get('fechaInicioLM')?.invalid && form.get('fechaInicioLM')?.touched) {
-          <mat-error>Este campo es requerido</mat-error>
-          }
-        </mat-form-field>
-      </div>
-
+      <!-- Pregunta 20 -->
       <mat-form-field appearance="outline" class="form-field-full">
-        <mat-label>21. ¿Cuántos días de licencia?*</mat-label>
-        <input matInput formControlName="diasLicencia" type="number" />
-        @if (form.get('diasLicencia')?.invalid && form.get('diasLicencia')?.touched) {
+        <mat-label>19. ¿Fecha que desea ser atendido?*</mat-label>
+        <input matInput [matDatepicker]="picker1" formControlName="fechaAtencion" />
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+        @if (form.get('fechaAtencion')?.invalid && form.get('fechaAtencion')?.touched) {
         <mat-error>Este campo es requerido</mat-error>
         }
       </mat-form-field>
 
-      <!-- Pregunta 23 -->
+      <!-- Pregunta 21 -->
       <mat-form-field appearance="outline" class="form-field-full">
         <mat-label
-          >22. ¿Se ha realizado algún estudio de laboratorio o imagen en los últimos 6
+          >20. ¿Se ha realizado algún estudio de laboratorio o imagen en los últimos 6
           meses?*</mat-label
         >
         <mat-select formControlName="tieneEstudiosLaboratorio">
@@ -323,9 +303,9 @@
         }
       </mat-form-field>
 
-      <!-- Pregunta 24 -->
+      <!-- Pregunta 22 -->
       <mat-form-field appearance="outline" class="form-field-full">
-        <mat-label>23. ¿Tiene algún documento de valoración por cualquier especialista?*</mat-label>
+        <mat-label>21. ¿Tiene algún documento de valoración por cualquier especialista?*</mat-label>
         <mat-select formControlName="tieneValoracionEspecialista">
           <mat-option value="si">Sí</mat-option>
           <mat-option value="no">No</mat-option>

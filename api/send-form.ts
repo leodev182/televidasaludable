@@ -34,9 +34,9 @@ export default async function handler(
 
     // Email a la clínica
     const emailClinica = await resend.emails.send({
-      from: 'onboarding@resend.dev',
+      from: 'formularios@almanovaclinic.com',
       to: process.env['CLINICA_EMAIL'] || 'televidasaludable@gmail.com',
-      subject: `Formulario Pre-Ocupacional - ${datosPersonales.nombres} ${datosPersonales.apellidos}`,
+      subject: `Formulario Pre-Ocupacional - ${datosPersonales.nombres} ${datosPersonales.apellidos} ${datosPersonales.run}`,
       html: `
         <h2>Nuevo Formulario Pre-Ocupacional</h2>
         <p><strong>Paciente:</strong> ${datosPersonales.nombres} ${datosPersonales.apellidos}</p>
@@ -56,7 +56,7 @@ export default async function handler(
 
     // Email al paciente
     const emailPaciente = await resend.emails.send({
-      from: 'onboarding@resend.dev',
+      from: 'noreply@almanovaclinic.com',
       to: datosPersonales.email,
       subject: 'Copia de su Declaración Jurada - Alma Nova Clinic',
       html: `

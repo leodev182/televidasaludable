@@ -73,8 +73,6 @@ export class InformacionEmpleadorComponent implements OnInit, OnDestroy {
       tipoContrato: [existingData?.tipoContrato || '', Validators.required],
       telefonoEmpresa: [existingData?.telefonoEmpresa || '', Validators.required],
       direccionEmpresa: [existingData?.direccionEmpresa || '', Validators.required],
-      nombreSupervisor: [existingData?.nombreSupervisor || ''],
-      telefonoSupervisor: [existingData?.telefonoSupervisor || ''],
     });
 
     this.validChange.emit(this.form.valid);

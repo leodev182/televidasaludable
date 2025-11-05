@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../../enviroments/enviroment';
+import { environment } from '../../../environments/environment';
 
 export enum LogLevel {
   DEBUG = 0,
@@ -13,7 +13,7 @@ export enum LogLevel {
   providedIn: 'root',
 })
 export class LoggerService {
-  // Configuración por ambiente
+  // 🎯 Configuración por ambiente
   private currentLevel: LogLevel = environment.production ? LogLevel.WARN : LogLevel.DEBUG;
 
   // Colores para consola
@@ -39,7 +39,7 @@ export class LoggerService {
   };
 
   /**
-   * Log de debug (desarrollo)
+   * Log de debug (solo desarrollo)
    */
   debug(context: string, message: string, data?: any): void {
     if (this.currentLevel <= LogLevel.DEBUG) {

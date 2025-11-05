@@ -2,7 +2,7 @@ import { Injectable, signal, effect, inject } from '@angular/core';
 import { LoggerService } from '../shared/services/logger.service';
 
 // ========================================
-// INTERFACES (las mismas que antes)
+// INTERFACES
 // ========================================
 export interface DatosPersonalesDTO {
   nombres: string;
@@ -20,16 +20,26 @@ export interface DatosPersonalesDTO {
   prevision: string;
 }
 
+/**
+ * DTO para Información del Empleador
+ *
+ * ✅ CAMPOS ACTIVOS (2025-11-05): Solo empresaNombre y empresaRut
+ *
+ * 🔒 CAMPOS DESACTIVADOS - Preservados para futuras modificaciones
+ */
 export interface InformacionEmpleadorDTO {
+  // ✅ Campos activos
   empresaNombre: string;
   empresaRut: string;
-  cargo: string;
-  fechaIngreso: Date;
-  tipoContrato: 'indefinido' | 'plazo-fijo' | 'honorarios' | 'otro';
-  telefonoEmpresa: string;
-  direccionEmpresa: string;
-  nombreSupervisor?: string;
-  telefonoSupervisor?: string;
+
+  // 🔒 Campos desactivados (2025-11-05)
+  // cargo: string;
+  // fechaIngreso: Date;
+  // tipoContrato: 'indefinido' | 'plazo-fijo' | 'honorarios' | 'otro';
+  // telefonoEmpresa: string;
+  // direccionEmpresa: string;
+  // nombreSupervisor?: string;
+  // telefonoSupervisor?: string;
 }
 
 export interface InformacionMedicaDTO {
@@ -142,7 +152,7 @@ export interface FormularioCompleto {
 })
 export class FormularioDataService {
   private readonly STORAGE_KEY = 'formulario_draft_v1';
-  private readonly AUTO_SAVE_DELAY = 3000; // ← CAMBIADO A 3 SEGUNDOS PARA TESTING
+  private readonly AUTO_SAVE_DELAY = 3000;
   private logger = inject(LoggerService);
 
   private data = signal<FormularioCompleto>({

@@ -65,14 +65,17 @@ export class InformacionEmpleadorComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const existingData = this.dataService.get('informacionEmpleador');
 
+    // ✅ SOLO Nombre de Empresa y RUT (2024-11-05)
+    // 🔒 Campos desactivados preservados en comentarios para futuras modificaciones
     this.form = this.fb.group({
       empresaNombre: [existingData?.empresaNombre || '', Validators.required],
       empresaRut: [existingData?.empresaRut || '', Validators.required],
-      cargo: [existingData?.cargo || '', Validators.required],
-      fechaIngreso: [existingData?.fechaIngreso || '', Validators.required],
-      tipoContrato: [existingData?.tipoContrato || '', Validators.required],
-      telefonoEmpresa: [existingData?.telefonoEmpresa || '', Validators.required],
-      direccionEmpresa: [existingData?.direccionEmpresa || '', Validators.required],
+
+      // cargo: [existingData?.cargo || '', Validators.required],
+      // fechaIngreso: [existingData?.fechaIngreso || '', Validators.required],
+      // tipoContrato: [existingData?.tipoContrato || '', Validators.required],
+      // telefonoEmpresa: [existingData?.telefonoEmpresa || '', Validators.required],
+      // direccionEmpresa: [existingData?.direccionEmpresa || '', Validators.required],
     });
 
     this.validChange.emit(this.form.valid);

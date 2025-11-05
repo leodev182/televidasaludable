@@ -6,7 +6,7 @@
 
   <form class="info-form" [formGroup]="form">
     <div class="form-grid">
-      <!-- Fila 1 -->
+      <!-- ✅ CAMPOS ACTIVOS -->
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>Nombre de la Empresa**</mat-label>
         <input matInput formControlName="empresaNombre" placeholder="Ej: Acme Corp." />
@@ -23,6 +23,8 @@
         }
       </mat-form-field>
 
+      <!-- 🔒 CAMPOS DESACTIVADOS (2024-11-05) - Preservados para futuras modificaciones
+      
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>Cargo**</mat-label>
         <input matInput formControlName="cargo" placeholder="Ej: Desarrollador Frontend" />
@@ -31,7 +33,6 @@
         }
       </mat-form-field>
 
-      <!-- Fila 2 -->
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>Fecha de Ingreso**</mat-label>
         <input matInput [matDatepicker]="picker" formControlName="fechaIngreso" />
@@ -63,7 +64,6 @@
         }
       </mat-form-field>
 
-      <!-- Fila 3 -->
       <mat-form-field appearance="outline" class="form-field full-width">
         <mat-label>Dirección de la Empresa**</mat-label>
         <input matInput formControlName="direccionEmpresa" placeholder="Calle, número, comuna" />
@@ -72,7 +72,7 @@
         }
       </mat-form-field>
 
-      <!-- ✂️ ELIMINADO: Supervisor fields/ dejo anotación para futuro uso -->
+      FIN CAMPOS DESACTIVADOS -->
     </div>
   </form>
 </section>
